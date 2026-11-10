@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الأستاذة فاطمة العرفاوي، محامية لدى التعقيب بتونس</title>
+<meta name="description" content="مكتب الأستاذة فاطمة العرفاوي، محامية لدى التعقيب بتونس. اطلب موعدك مباشرة عبر الإنترنت.">
+<meta name="theme-color" content="#0F2450">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F2450'/%3E%3Ccircle cx='20' cy='32' r='5' fill='%23C29A48'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23C29A48'/%3E%3Ccircle cx='44' cy='32' r='5' fill='%23C29A48'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Attorney",
+  "name": "Maître Fatma Arfaoui",
+  "alternateName": "الأستاذة فاطمة العرفاوي",
+  "telephone": "+21692859325",
+  "email": "maitre@avocat-arfaouifatma.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Centre Urbain Nord, Résidence Tour de Bureaux International City Center, 5e étage, bureau B06",
+    "addressLocality": "Tunis",
+    "addressCountry": "TN"
+  },
+  "openingHours": ["Mo-Fr 08:00-18:00", "Sa 09:00-13:00"]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#rdv" data-i18n="skip">انتقل إلى حجز الموعد</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#" data-i18n="brand">الأستاذة فاطمة العرفاوي</a>
+    <nav class="nav" aria-label="Navigation">
+      <a href="#domaines" data-i18n="nav.domains">مجالات العمل</a>
+      <a href="#deroulement" data-i18n="nav.steps">كيف يتم الموعد</a>
+      <a href="#questions" data-i18n="nav.faq">أسئلة متكررة</a>
+      <a href="#contact" data-i18n="nav.contact">العنوان</a>
+    </nav>
+    <button class="lang" type="button" id="lang-btn" lang="fr" dir="ltr">Français</button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap hero-in">
+
+    <div class="hero-text">
+      <h1 data-i18n="hero.title">الأستاذة فاطمة العرفاوي</h1>
+      <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="role" data-i18n="hero.role">محامية لدى التعقيب، تونس</p>
+      <p class="lead" data-i18n="hero.lead">الأستاذة كثيرًا ما تكون في الجلسات ولا تستطيع الردّ على الهاتف. اختر اليوم والساعة التي تناسبك، والمكتب يؤكّد لك الموعد عبر واتساب.</p>
+      <p class="hero-links">
+        <a class="link-light" href="tel:+21692859325"><span data-i18n="hero.call">اتصل بالمكتب</span> <bdi dir="ltr">+216 92 859 325</bdi></a>
+      </p>
+    </div>
+
+    <form class="book" id="rdv" novalidate>
+      <h2 data-i18n="book.title">اطلب موعدًا</h2>
+
+      <fieldset>
+        <legend data-i18n="book.day">اليوم</legend>
+        <div class="chips days" id="days"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i18n="book.time">الساعة</legend>
+        <div class="chips times" id="times"></div>
+      </fieldset>
+
+      <div class="row">
+        <label class="field">
+          <span data-i18n="book.name">الاسم واللقب</span>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span data-i18n="book.subject">موضوع الاستشارة</span>
+          <select id="subject" name="subject"></select>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend data-i18n="book.mode">طريقة الموعد</legend>
+        <div class="chips modes">
+          <label class="chip"><input type="radio" name="mode" value="office" checked><span data-i18n="book.mode.office">في المكتب</span></label>
+          <label class="chip"><input type="radio" name="mode" value="remote"><span data-i18n="book.mode.remote">عن بعد</span></label>
+        </div>
+      </fieldset>
+
+      <p class="error" id="error" role="alert" hidden></p>
+
+      <button class="send" type="submit" data-i18n="book.send">أرسل الطلب عبر واتساب</button>
+      <p class="note" data-i18n="book.note">يُفتح واتساب برسالة جاهزة. الموعد لا يُعتبر مؤكّدًا إلا بعد ردّ المكتب.</p>
+    </form>
+
+  </div>
+</section>
+
+<section class="section" id="domaines">
+  <div class="wrap">
+    <h2 data-i18n="dom.title">مجالات العمل</h2>
+    <p class="intro" data-i18n="dom.intro">المكتب يقدّم الاستشارة ويتولّى النزاعات أمام المحاكم، للأفراد وللمؤسسات.</p>
+    <div class="domains">
+      <article><h3 data-i18n="d1.t">القانون التجاري</h3><p data-i18n="d1.p">العقود التجارية، الأصل التجاري، استخلاص الديون والنزاعات بين التجار.</p></article>
+      <article><h3 data-i18n="d2.t">القانون المدني والأحوال الشخصية</h3><p data-i18n="d2.p">الطلاق، الحضانة والنفقة، المواريث والقسمة، المسؤولية والتعويض.</p></article>
+      <article><h3 data-i18n="d3.t">قانون الشركات</h3><p data-i18n="d3.p">تأسيس الشركات، تحرير العقود التأسيسية، النزاعات بين الشركاء، التصفية.</p></article>
+      <article><h3 data-i18n="d4.t">القانون الجبائي</h3><p data-i18n="d4.p">المراجعة الجبائية، الاعتراض على قرارات التوظيف والنزاعات مع الإدارة.</p></article>
+      <article><h3 data-i18n="d5.t">قانون الاستثمار</h3><p data-i18n="d5.p">مرافقة المستثمرين التونسيين والأجانب في إجراءات بعث المشاريع.</p></article>
+      <article><h3 data-i18n="d6.t">التحكيم والنزاعات</h3><p data-i18n="d6.p">تمثيل الحرفاء أمام المحاكم وهيئات التحكيم، والتفاوض قبل التقاضي.</p></article>
+      <article><h3 data-i18n="d7.t">الملكية الفكرية</h3><p data-i18n="d7.p">تسجيل العلامات وحمايتها، حقوق المؤلف، دعاوى التقليد.</p></article>
+      <article><h3 data-i18n="d8.t">القانون الدولي</h3><p data-i18n="d8.p">العقود والمعاملات العابرة للحدود والتحكيم الدولي.</p></article>
+      <article><h3 data-i18n="d9.t">القانون الجزائي</h3><p data-i18n="d9.p">الدفاع عن المتهمين والقيام بالحق الشخصي في كل أطوار القضية.</p></article>
+      <article><h3 data-i18n="d10.t">القانون العقاري</h3><p data-i18n="d10.p">البيوعات العقارية، التسجيل، نزاعات الملكية والكراء.</p></article>
+      <article><h3 data-i18n="d11.t">القانون الإداري</h3><p data-i18n="d11.p">الطعن في القرارات الإدارية والنزاعات أمام المحكمة الإدارية.</p></article>
+      <article><h3 data-i18n="d12.t">قانون الشغل</h3><p data-i18n="d12.p">عقود الشغل، الطرد التعسفي والنزاعات أمام دوائر الشغل.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section tinted" id="deroulement">
+  <div class="wrap">
+    <h2 data-i18n="steps.title">كيف يتم الموعد</h2>
+    <ol class="steps">
+      <li><h3 data-i18n="s1.t">تختار اليوم والساعة</h3><p data-i18n="s1.p">من الاستمارة في أعلى الصفحة، وترسل الطلب عبر واتساب.</p></li>
+      <li><h3 data-i18n="s2.t">المكتب يؤكّد لك</h3><p data-i18n="s2.p">يصلك ردّ على واتساب يؤكّد الموعد أو يقترح ساعة أخرى إن كانت الأستاذة في جلسة.</p></li>
+      <li><h3 data-i18n="s3.t">تلتقي بالأستاذة</h3><p data-i18n="s3.p">في المكتب بالمركز العمراني الشمالي، أو عن بعد بالهاتف أو بالفيديو.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="questions">
+  <div class="wrap narrow">
+    <h2 data-i18n="faq.title">أسئلة متكررة</h2>
+    <details>
+      <summary data-i18n="q1.q">اتصلت بالأستاذة ولم تردّ، ماذا أفعل؟</summary>
+      <p data-i18n="q1.a">الأستاذة تقضي جزءًا كبيرًا من يومها في المحاكم. أرسل طلب الموعد من هذه الصفحة أو اكتب مباشرة على واتساب، والمكتب يعاود الاتصال بك.</p>
+    </details>
+    <details>
+      <summary data-i18n="q2.q">ماذا أُحضر معي في أول موعد؟</summary>
+      <p data-i18n="q2.a">بطاقة التعريف وكل الوثائق المتعلقة بالملف: العقود، الأحكام، المراسلات والاستدعاءات. كلما كان الملف كاملًا كانت الاستشارة أدقّ.</p>
+    </details>
+    <details>
+      <summary data-i18n="q3.q">هل يمكن أن تكون الاستشارة عن بعد؟</summary>
+      <p data-i18n="q3.a">نعم، بالهاتف أو بالفيديو. اختر «عن بعد» عند طلب الموعد. الاستشارة الأولى عن بعد مجانية.</p>
+    </details>
+    <details>
+      <summary data-i18n="q4.q">هل ما أقوله للأستاذة يبقى سرًّا؟</summary>
+      <p data-i18n="q4.a">نعم. المحامي ملزم قانونًا بالسرّ المهني، وكل ما تقوله أو تسلّمه من وثائق يبقى بينك وبين المكتب.</p>
+    </details>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-in">
+    <div>
+      <h2 data-i18n="c.title">العنوان وأوقات العمل</h2>
+      <address>
+        <p data-i18n="c.addr">المركز العمراني الشمالي، إقامة برج المكاتب <span lang="fr" dir="ltr">International City Center</span>، الطابق الخامس، مكتب <span dir="ltr">B06</span>، تونس</p>
+        <p><a href="tel:+21692859325"><bdi dir="ltr">+216 92 859 325</bdi></a></p>
+        <p><a href="mailto:maitre@avocat-arfaouifatma.com"><bdi dir="ltr">maitre@avocat-arfaouifatma.com</bdi></a></p>
+      </address>
+      <table class="hours">
+        <tr><th scope="row" data-i18n="c.week">من الاثنين إلى الجمعة</th><td><bdi dir="ltr">08:00 – 18:00</bdi></td></tr>
+        <tr><th scope="row" data-i18n="c.sat">السبت</th><td><bdi dir="ltr">09:00 – 13:00</bdi></td></tr>
+        <tr><th scope="row" data-i18n="c.sun">الأحد</th><td data-i18n="c.closed">مغلق</td></tr>
+      </table>
+      <p class="contact-actions">
+        <a class="btn" href="https://wa.me/21692859325" target="_blank" rel="noopener" data-i18n="c.wa">اكتب على واتساب</a>
+        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=International+City+Center+Centre+Urbain+Nord+Tunis" target="_blank" rel="noopener" data-i18n="c.map">افتح الخريطة</a>
+      </p>
+    </div>
+    <iframe class="map" title="Carte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=International+City+Center+Centre+Urbain+Nord+Tunis&output=embed"></iframe>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p data-i18n="foot">مكتب الأستاذة فاطمة العرفاوي، محامية لدى التعقيب. المعلومات الواردة في هذا الموقع عامة ولا تُعتبر استشارة قانونية.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
