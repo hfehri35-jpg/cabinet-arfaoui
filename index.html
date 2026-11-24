@@ -103,8 +103,29 @@
 
       <label class="field field-full">
         <span data-i18n="book.name">الاسم واللقب</span>
-        <input type="text" id="name" name="name" autocomplete="name" required>
+        <input type="text" id="name" name="name" autocomplete="name" maxlength="80" required>
       </label>
+
+      <div class="row">
+        <label class="field">
+          <span data-i18n="book.phone">رقم الهاتف</span>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" maxlength="20" placeholder="+216 ..." required>
+        </label>
+        <label class="field">
+          <span data-i18n="book.motif">موضوع الطلب (اختياري)</span>
+          <select id="motif" name="motif">
+            <option value="" data-i18n="m.none">اختر</option>
+            <option value="famille" data-i18n="m.famille">أحوال شخصية / عائلة</option>
+            <option value="penal" data-i18n="m.penal">جزائي</option>
+            <option value="civil" data-i18n="m.civil">مدني</option>
+            <option value="commercial" data-i18n="m.commercial">تجاري / شركات</option>
+            <option value="travail" data-i18n="m.travail">شغل</option>
+            <option value="immobilier" data-i18n="m.immobilier">عقاري</option>
+            <option value="administratif" data-i18n="m.admin">إداري</option>
+            <option value="autre" data-i18n="m.autre">آخر</option>
+          </select>
+        </label>
+      </div>
 
       <div class="row">
         <fieldset>
@@ -130,6 +151,14 @@
           <label class="chip"><input type="radio" name="mode" value="remote"><span data-i18n="book.mode.remote">عن بعد</span></label>
         </div>
       </fieldset>
+
+      <!-- Champ piège invisible : seuls les robots le remplissent -->
+      <input class="hp" type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <label class="consent">
+        <input type="checkbox" id="consent" name="consent">
+        <span data-i18n="book.consent">أوافق على أن يحتفظ المكتب بهذه المعطيات لمعالجة طلبي فقط، طبقًا للقانون عدد 63 لسنة 2004 المتعلق بحماية المعطيات الشخصية.</span>
+      </label>
 
       <p class="summary" id="summary" aria-live="polite" hidden><svg class="ic"><use href="#i-clock"/></svg><span></span></p>
       <p class="error" id="error" role="alert" hidden></p>

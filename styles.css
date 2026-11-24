@@ -226,6 +226,11 @@ html[dir="rtl"] .pill-link.ghost:hover .ic { transform: scaleX(-1) translateX(3p
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
 .field input:hover, .field select:hover { border-color: #b5c2d8; }
+.field { display: block; }
+.field select { appearance: auto; }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.consent { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: 1.1rem; font-size: .85rem; line-height: 1.5; color: var(--muted); cursor: pointer; }
+.consent input { width: 1.1rem; height: 1.1rem; margin-top: .15rem; flex: none; accent-color: var(--tunis); }
 .field input:focus, .field select:focus { outline: none; border-color: var(--tunis); background: #fff; box-shadow: 0 0 0 4px rgba(23, 51, 107, .12); }
 
 .summary {

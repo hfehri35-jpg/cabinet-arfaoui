@@ -6,7 +6,16 @@ const CONFIG = {
   slotMinutes: 60,
   daysShown: 6,
   minNoticeHours: 2,
+  // Adresse du script Google qui enregistre les demandes (voir GUIDE.md).
+  // Vide = rien n'est enregistré, la demande part seulement sur WhatsApp.
+  sheetUrl: '',
 };
+
+// D'où vient le client : ?src=qr (code QR), ?src=wa (message WhatsApp), sinon « site ».
+const SOURCE = (() => {
+  const s = new URLSearchParams(location.search).get('src');
+  return ['qr', 'wa', 'repondeur'].includes(s) ? s : 'site';
+})();
 
 const FR = {
   'skip': 'Aller à la prise de rendez-vous',
@@ -24,6 +33,18 @@ const FR = {
   'book.day': 'Jour',
   'book.time': 'Heure',
   'book.name': 'Nom et prénom',
+  'book.phone': 'Téléphone',
+  'book.motif': 'Objet de la demande (facultatif)',
+  'm.none': 'Choisir',
+  'm.famille': 'Famille / statut personnel',
+  'm.penal': 'Pénal',
+  'm.civil': 'Civil',
+  'm.commercial': 'Commercial / sociétés',
+  'm.travail': 'Droit du travail',
+  'm.immobilier': 'Immobilier',
+  'm.admin': 'Administratif',
+  'm.autre': 'Autre',
+  'book.consent': 'J’accepte que le cabinet conserve ces informations uniquement pour traiter ma demande, conformément à la loi n° 2004-63 sur la protection des données personnelles.',
   'book.client': 'Vous êtes',
   'book.client.new': 'Nouveau client',
   'book.client.old': 'Déjà client',
@@ -72,12 +93,14 @@ const UI = {
     noSlots: 'لا توجد ساعات متاحة في هذا اليوم.',
     errName: 'اكتب اسمك ولقبك حتى يعرف المكتب من يطلب الموعد.',
     errSlot: 'اختر يومًا وساعة قبل إرسال الطلب.',
+    errPhone: 'اكتب رقم هاتف صحيح حتى يتمكّن المكتب من الاتصال بك.',
+    errConsent: 'يجب الموافقة على الاحتفاظ بالمعطيات حتى يُعالَج طلبك.',
     menu: 'القائمة',
     openNow: (close) => `المكتب مفتوح الآن · يغلق على الساعة ${close}`,
     closedNow: (when, time) => `المكتب مغلق الآن · يفتح ${when} على الساعة ${time}`,
     today: 'اليوم', tomorrow: 'غدًا',
     summary: (day, time) => `موعدك: ${day} على الساعة ${time}`,
-    msg: (d) => `${d.urgent ? '⚠️ طلب عاجل\n\n' : ''}السلام عليكم أستاذة، أرغب في حجز موعد.\nالاسم: ${d.name}\nالحريف: ${d.client}\nعاجل: ${d.urgency}\nاليوم: ${d.day}\nالساعة: ${d.time}\nطريقة الموعد: ${d.mode}`,
+    msg: (d) => `${d.urgent ? '⚠️ طلب عاجل\n\n' : ''}السلام عليكم أستاذة، أرغب في حجز موعد.\nالاسم: ${d.name}\nالحريف: ${d.client}\nعاجل: ${d.urgency}\nاليوم: ${d.day}\nالساعة: ${d.time}\nطريقة الموعد: ${d.mode}${d.motif ? `\nالموضوع: ${d.motif}` : ''}`,
   },
   fr: {
     title: 'Maître Fatma Arfaoui, avocate près la Cour de cassation à Tunis',
@@ -88,12 +111,14 @@ const UI = {
     noSlots: 'Aucun créneau disponible ce jour-là.',
     errName: 'Indiquez votre nom et prénom pour que le cabinet sache qui demande le rendez-vous.',
     errSlot: 'Choisissez un jour et une heure avant d’envoyer la demande.',
+    errPhone: 'Indiquez un numéro de téléphone valide pour que le cabinet puisse vous joindre.',
+    errConsent: 'Vous devez accepter la conservation de vos informations pour que votre demande soit traitée.',
     menu: 'Menu',
     openNow: (close) => `Ouvert maintenant · ferme à ${close}`,
     closedNow: (when, time) => `Fermé pour le moment · ouvre ${when} à ${time}`,
     today: 'aujourd’hui', tomorrow: 'demain',
     summary: (day, time) => `Votre créneau : ${day} à ${time}`,
-    msg: (d) => `${d.urgent ? '⚠️ DEMANDE URGENTE\n\n' : ''}Bonjour Maître, je souhaite prendre rendez-vous.\nNom : ${d.name}\nClient : ${d.client}\nUrgence : ${d.urgency}\nJour : ${d.day}\nHeure : ${d.time}\nType : ${d.mode}`,
+    msg: (d) => `${d.urgent ? '⚠️ DEMANDE URGENTE\n\n' : ''}Bonjour Maître, je souhaite prendre rendez-vous.\nNom : ${d.name}\nClient : ${d.client}\nUrgence : ${d.urgency}\nJour : ${d.day}\nHeure : ${d.time}\nType : ${d.mode}${d.motif ? `\nObjet : ${d.motif}` : ''}`,
   },
 };
 
@@ -174,6 +199,19 @@ $('#lang-btn').addEventListener('click', () => setLang(lang === 'ar' ? 'fr' : 'a
 $('#days').addEventListener('change', (e) => { selectedDay = e.target.value; renderTimes(); renderSummary(); });
 $('#times').addEventListener('change', (e) => { selectedTime = e.target.value; $('#error').hidden = true; renderSummary(); });
 $('#client').addEventListener('change', () => { $('#error').hidden = true; });
+$('#consent').addEventListener('change', () => { $('#error').hidden = true; });
+
+// Enregistre la demande dans le tableau Google du cabinet, sans bloquer WhatsApp.
+function logRequest(data) {
+  if (!CONFIG.sheetUrl) return;
+  try {
+    fetch(CONFIG.sheetUrl, {
+      method: 'POST', mode: 'no-cors', keepalive: true,
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data),
+    }).catch(() => {});
+  } catch (e) {}
+}
 
 // Rappel du créneau choisi, sous le formulaire
 function renderSummary() {
@@ -225,10 +263,16 @@ $('#rdv').addEventListener('submit', (e) => {
   if (!name) { err.textContent = UI[lang].errName; err.hidden = false; $('#name').focus(); return; }
   const client = document.querySelector('input[name="client"]:checked');
   if (!client) { err.textContent = UI[lang].errClient; err.hidden = false; $('#client input').focus(); return; }
+  const phone = $('#phone').value.trim();
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length < 8 || digits.length > 15) { err.textContent = UI[lang].errPhone; err.hidden = false; $('#phone').focus(); return; }
+  if (!$('#consent').checked) { err.textContent = UI[lang].errConsent; err.hidden = false; $('#consent').focus(); return; }
   err.hidden = true;
   const label = (input) => input.nextElementSibling.textContent;
   const urgent = document.querySelector('input[name="urgent"]:checked');
-  const mode = label(document.querySelector('input[name="mode"]:checked'));
+  const modeInput = document.querySelector('input[name="mode"]:checked');
+  const motifSel = $('#motif');
+  const motif = motifSel.value ? motifSel.options[motifSel.selectedIndex].textContent : '';
   const text = UI[lang].msg({
     name,
     day: fmt(day.date, {weekday: 'long', day: 'numeric', month: 'long'}),
@@ -236,7 +280,14 @@ $('#rdv').addEventListener('submit', (e) => {
     client: label(client),
     urgency: label(urgent),
     urgent: urgent.value === 'yes',
-    mode,
+    mode: label(modeInput),
+    motif,
+  });
+  logRequest({
+    day: day.iso, time: selectedTime, name, phone,
+    client: client.value, urgent: urgent.value, mode: modeInput.value,
+    motif: motifSel.value, lang, source: SOURCE,
+    website: $('#website').value,
   });
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
 });
