@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,38 +32,77 @@
 </head>
 <body>
 
-<a class="skip" href="#rdv" data-i18n="skip">انتقل إلى حجز الموعد</a>
+<!-- Icônes (dessinées une fois, réutilisées avec <use>) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-commerce" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8"/></symbol>
+    <symbol id="i-company" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/></symbol>
+    <symbol id="i-tax" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9.5 15.5l5-7"/><circle cx="9.5" cy="9" r="1"/><circle cx="14.5" cy="15" r="1"/></symbol>
+    <symbol id="i-invest" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7 2 14a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-idea" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-admin" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5z"/><path d="M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 21h18"/></symbol>
+    <symbol id="i-work" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14 10h4M14 13h3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.6 19z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
 
-<header class="top">
+<a class="skip" href="#rdv" data-i18n="skip">انتقل إلى حجز الموعد</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<header class="top" id="top">
   <div class="wrap top-in">
-    <a class="brand" href="#" data-i18n="brand">الأستاذة فاطمة العرفاوي</a>
-    <nav class="nav" aria-label="Navigation">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span data-i18n="brand">الأستاذة فاطمة العرفاوي</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Navigation">
       <a href="#domaines" data-i18n="nav.domains">مجالات العمل</a>
       <a href="#deroulement" data-i18n="nav.steps">كيف يتم الموعد</a>
       <a href="#questions" data-i18n="nav.faq">أسئلة متكررة</a>
       <a href="#contact" data-i18n="nav.contact">العنوان</a>
+      <a class="nav-cta" href="#rdv" data-i18n="nav.cta">اطلب موعدًا</a>
     </nav>
     <button class="lang" type="button" id="lang-btn" lang="fr" dir="ltr">Français</button>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <main>
 
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span><span class="dots"></span></div>
   <div class="wrap hero-in">
 
     <div class="hero-text">
-      <h1 data-i18n="hero.title">الأستاذة فاطمة العرفاوي</h1>
-      <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <p class="role" data-i18n="hero.role">محامية لدى التعقيب، تونس</p>
-      <p class="lead" data-i18n="hero.lead">الأستاذة كثيرًا ما تكون في الجلسات ولا تستطيع الردّ على الهاتف. اختر اليوم والساعة التي تناسبك، والمكتب يؤكّد لك الموعد عبر واتساب.</p>
-      <p class="hero-links">
-        <a class="link-light" href="tel:+21692859325"><span data-i18n="hero.call">اتصل بالمكتب</span> <bdi dir="ltr">+216 92 859 325</bdi></a>
+      <p class="status rise" id="status-hero" style="--d:0" hidden><span class="pulse"></span><span class="status-txt"></span></p>
+      <h1 class="rise" style="--d:1" data-i18n="hero.title">الأستاذة فاطمة العرفاوي</h1>
+      <div class="studs rise" style="--d:2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="role rise" style="--d:2" data-i18n="hero.role">محامية لدى التعقيب، تونس</p>
+      <p class="lead rise" style="--d:3" data-i18n="hero.lead">الأستاذة كثيرًا ما تكون في الجلسات ولا تستطيع الردّ على الهاتف. اختر اليوم والساعة التي تناسبك، والمكتب يؤكّد لك الموعد عبر واتساب.</p>
+      <p class="hero-links rise" style="--d:4">
+        <a class="pill-link" href="tel:+21692859325"><svg class="ic"><use href="#i-phone"/></svg><span data-i18n="hero.call">اتصل بالمكتب</span> <bdi dir="ltr">+216 92 859 325</bdi></a>
+        <a class="pill-link ghost" href="#domaines"><span data-i18n="hero.more">اكتشف مجالات العمل</span><svg class="ic flip"><use href="#i-arrow"/></svg></a>
       </p>
     </div>
 
-    <form class="book" id="rdv" novalidate>
-      <h2 data-i18n="book.title">اطلب موعدًا</h2>
+    <form class="book rise" style="--d:2" id="rdv" novalidate>
+      <div class="book-head">
+        <span class="book-ic" aria-hidden="true"><svg class="ic"><use href="#i-cal"/></svg></span>
+        <h2 data-i18n="book.title">اطلب موعدًا</h2>
+      </div>
 
       <fieldset>
         <legend data-i18n="book.day">اليوم</legend>
@@ -93,9 +133,10 @@
         </div>
       </fieldset>
 
+      <p class="summary" id="summary" aria-live="polite" hidden><svg class="ic"><use href="#i-clock"/></svg><span></span></p>
       <p class="error" id="error" role="alert" hidden></p>
 
-      <button class="send" type="submit" data-i18n="book.send">أرسل الطلب عبر واتساب</button>
+      <button class="send" type="submit"><svg class="ic"><use href="#i-chat"/></svg><span data-i18n="book.send">أرسل الطلب عبر واتساب</span></button>
       <p class="note" data-i18n="book.note">يُفتح واتساب برسالة جاهزة. الموعد لا يُعتبر مؤكّدًا إلا بعد ردّ المكتب.</p>
     </form>
 
@@ -104,89 +145,103 @@
 
 <section class="section" id="domaines">
   <div class="wrap">
-    <h2 data-i18n="dom.title">مجالات العمل</h2>
-    <p class="intro" data-i18n="dom.intro">المكتب يقدّم الاستشارة ويتولّى النزاعات أمام المحاكم، للأفراد وللمؤسسات.</p>
+    <p class="eyebrow reveal" data-i18n="dom.eyebrow">المكتب</p>
+    <h2 class="reveal" data-i18n="dom.title">مجالات العمل</h2>
+    <p class="intro reveal" data-i18n="dom.intro">المكتب يقدّم الاستشارة ويتولّى النزاعات أمام المحاكم، للأفراد وللمؤسسات.</p>
     <div class="domains">
-      <article><h3 data-i18n="d1.t">القانون التجاري</h3><p data-i18n="d1.p">العقود التجارية، الأصل التجاري، استخلاص الديون والنزاعات بين التجار.</p></article>
-      <article><h3 data-i18n="d2.t">القانون المدني والأحوال الشخصية</h3><p data-i18n="d2.p">الطلاق، الحضانة والنفقة، المواريث والقسمة، المسؤولية والتعويض.</p></article>
-      <article><h3 data-i18n="d3.t">قانون الشركات</h3><p data-i18n="d3.p">تأسيس الشركات، تحرير العقود التأسيسية، النزاعات بين الشركاء، التصفية.</p></article>
-      <article><h3 data-i18n="d4.t">القانون الجبائي</h3><p data-i18n="d4.p">المراجعة الجبائية، الاعتراض على قرارات التوظيف والنزاعات مع الإدارة.</p></article>
-      <article><h3 data-i18n="d5.t">قانون الاستثمار</h3><p data-i18n="d5.p">مرافقة المستثمرين التونسيين والأجانب في إجراءات بعث المشاريع.</p></article>
-      <article><h3 data-i18n="d6.t">التحكيم والنزاعات</h3><p data-i18n="d6.p">تمثيل الحرفاء أمام المحاكم وهيئات التحكيم، والتفاوض قبل التقاضي.</p></article>
-      <article><h3 data-i18n="d7.t">الملكية الفكرية</h3><p data-i18n="d7.p">تسجيل العلامات وحمايتها، حقوق المؤلف، دعاوى التقليد.</p></article>
-      <article><h3 data-i18n="d8.t">القانون الدولي</h3><p data-i18n="d8.p">العقود والمعاملات العابرة للحدود والتحكيم الدولي.</p></article>
-      <article><h3 data-i18n="d9.t">القانون الجزائي</h3><p data-i18n="d9.p">الدفاع عن المتهمين والقيام بالحق الشخصي في كل أطوار القضية.</p></article>
-      <article><h3 data-i18n="d10.t">القانون العقاري</h3><p data-i18n="d10.p">البيوعات العقارية، التسجيل، نزاعات الملكية والكراء.</p></article>
-      <article><h3 data-i18n="d11.t">القانون الإداري</h3><p data-i18n="d11.p">الطعن في القرارات الإدارية والنزاعات أمام المحكمة الإدارية.</p></article>
-      <article><h3 data-i18n="d12.t">قانون الشغل</h3><p data-i18n="d12.p">عقود الشغل، الطرد التعسفي والنزاعات أمام دوائر الشغل.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-commerce"/></svg></span><h3 data-i18n="d1.t">القانون التجاري</h3><p data-i18n="d1.p">العقود التجارية، الأصل التجاري، استخلاص الديون والنزاعات بين التجار.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-family"/></svg></span><h3 data-i18n="d2.t">القانون المدني والأحوال الشخصية</h3><p data-i18n="d2.p">الطلاق، الحضانة والنفقة، المواريث والقسمة، المسؤولية والتعويض.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-company"/></svg></span><h3 data-i18n="d3.t">قانون الشركات</h3><p data-i18n="d3.p">تأسيس الشركات، تحرير العقود التأسيسية، النزاعات بين الشركاء، التصفية.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-tax"/></svg></span><h3 data-i18n="d4.t">القانون الجبائي</h3><p data-i18n="d4.p">المراجعة الجبائية، الاعتراض على قرارات التوظيف والنزاعات مع الإدارة.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-invest"/></svg></span><h3 data-i18n="d5.t">قانون الاستثمار</h3><p data-i18n="d5.p">مرافقة المستثمرين التونسيين والأجانب في إجراءات بعث المشاريع.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-scale"/></svg></span><h3 data-i18n="d6.t">التحكيم والنزاعات</h3><p data-i18n="d6.p">تمثيل الحرفاء أمام المحاكم وهيئات التحكيم، والتفاوض قبل التقاضي.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-idea"/></svg></span><h3 data-i18n="d7.t">الملكية الفكرية</h3><p data-i18n="d7.p">تسجيل العلامات وحمايتها، حقوق المؤلف، دعاوى التقليد.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-globe"/></svg></span><h3 data-i18n="d8.t">القانون الدولي</h3><p data-i18n="d8.p">العقود والمعاملات العابرة للحدود والتحكيم الدولي.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-shield"/></svg></span><h3 data-i18n="d9.t">القانون الجزائي</h3><p data-i18n="d9.p">الدفاع عن المتهمين والقيام بالحق الشخصي في كل أطوار القضية.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-home"/></svg></span><h3 data-i18n="d10.t">القانون العقاري</h3><p data-i18n="d10.p">البيوعات العقارية، التسجيل، نزاعات الملكية والكراء.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-admin"/></svg></span><h3 data-i18n="d11.t">القانون الإداري</h3><p data-i18n="d11.p">الطعن في القرارات الإدارية والنزاعات أمام المحكمة الإدارية.</p></article>
+      <article class="reveal"><span class="d-ic"><svg><use href="#i-work"/></svg></span><h3 data-i18n="d12.t">قانون الشغل</h3><p data-i18n="d12.p">عقود الشغل، الطرد التعسفي والنزاعات أمام دوائر الشغل.</p></article>
     </div>
   </div>
 </section>
 
 <section class="section tinted" id="deroulement">
   <div class="wrap">
-    <h2 data-i18n="steps.title">كيف يتم الموعد</h2>
+    <p class="eyebrow reveal" data-i18n="steps.eyebrow">بسيط وسريع</p>
+    <h2 class="reveal" data-i18n="steps.title">كيف يتم الموعد</h2>
     <ol class="steps">
-      <li><h3 data-i18n="s1.t">تختار اليوم والساعة</h3><p data-i18n="s1.p">من الاستمارة في أعلى الصفحة، وترسل الطلب عبر واتساب.</p></li>
-      <li><h3 data-i18n="s2.t">المكتب يؤكّد لك</h3><p data-i18n="s2.p">يصلك ردّ على واتساب يؤكّد الموعد أو يقترح ساعة أخرى إن كانت الأستاذة في جلسة.</p></li>
-      <li><h3 data-i18n="s3.t">تلتقي بالأستاذة</h3><p data-i18n="s3.p">في المكتب بالمركز العمراني الشمالي، أو عن بعد بالهاتف أو بالفيديو.</p></li>
+      <li class="reveal"><h3 data-i18n="s1.t">تختار اليوم والساعة</h3><p data-i18n="s1.p">من الاستمارة في أعلى الصفحة، وترسل الطلب عبر واتساب.</p></li>
+      <li class="reveal"><h3 data-i18n="s2.t">المكتب يؤكّد لك</h3><p data-i18n="s2.p">يصلك ردّ على واتساب يؤكّد الموعد أو يقترح ساعة أخرى إن كانت الأستاذة في جلسة.</p></li>
+      <li class="reveal"><h3 data-i18n="s3.t">تلتقي بالأستاذة</h3><p data-i18n="s3.p">في المكتب بالمركز العمراني الشمالي، أو عن بعد بالهاتف أو بالفيديو.</p></li>
     </ol>
+    <p class="steps-cta reveal"><a class="btn dark" href="#rdv"><span data-i18n="steps.cta">اطلب موعدك الآن</span><svg class="ic flip"><use href="#i-arrow"/></svg></a></p>
   </div>
 </section>
 
 <section class="section" id="questions">
   <div class="wrap narrow">
-    <h2 data-i18n="faq.title">أسئلة متكررة</h2>
-    <details>
-      <summary data-i18n="q1.q">اتصلت بالأستاذة ولم تردّ، ماذا أفعل؟</summary>
-      <p data-i18n="q1.a">الأستاذة تقضي جزءًا كبيرًا من يومها في المحاكم. أرسل طلب الموعد من هذه الصفحة أو اكتب مباشرة على واتساب، والمكتب يعاود الاتصال بك.</p>
-    </details>
-    <details>
-      <summary data-i18n="q2.q">ماذا أُحضر معي في أول موعد؟</summary>
-      <p data-i18n="q2.a">بطاقة التعريف وكل الوثائق المتعلقة بالملف: العقود، الأحكام، المراسلات والاستدعاءات. كلما كان الملف كاملًا كانت الاستشارة أدقّ.</p>
-    </details>
-    <details>
-      <summary data-i18n="q3.q">هل يمكن أن تكون الاستشارة عن بعد؟</summary>
-      <p data-i18n="q3.a">نعم، بالهاتف أو بالفيديو. اختر «عن بعد» عند طلب الموعد. الاستشارة الأولى عن بعد مجانية.</p>
-    </details>
-    <details>
-      <summary data-i18n="q4.q">هل ما أقوله للأستاذة يبقى سرًّا؟</summary>
-      <p data-i18n="q4.a">نعم. المحامي ملزم قانونًا بالسرّ المهني، وكل ما تقوله أو تسلّمه من وثائق يبقى بينك وبين المكتب.</p>
-    </details>
+    <p class="eyebrow reveal" data-i18n="faq.eyebrow">لديك سؤال؟</p>
+    <h2 class="reveal" data-i18n="faq.title">أسئلة متكررة</h2>
+    <div class="faq">
+      <details class="reveal">
+        <summary data-i18n="q1.q">اتصلت بالأستاذة ولم تردّ، ماذا أفعل؟</summary>
+        <p data-i18n="q1.a">الأستاذة تقضي جزءًا كبيرًا من يومها في المحاكم. أرسل طلب الموعد من هذه الصفحة أو اكتب مباشرة على واتساب، والمكتب يعاود الاتصال بك.</p>
+      </details>
+      <details class="reveal">
+        <summary data-i18n="q2.q">ماذا أُحضر معي في أول موعد؟</summary>
+        <p data-i18n="q2.a">بطاقة التعريف وكل الوثائق المتعلقة بالملف: العقود، الأحكام، المراسلات والاستدعاءات. كلما كان الملف كاملًا كانت الاستشارة أدقّ.</p>
+      </details>
+      <details class="reveal">
+        <summary data-i18n="q3.q">هل يمكن أن تكون الاستشارة عن بعد؟</summary>
+        <p data-i18n="q3.a">نعم، بالهاتف أو بالفيديو. اختر «عن بعد» عند طلب الموعد. الاستشارة الأولى عن بعد مجانية.</p>
+      </details>
+      <details class="reveal">
+        <summary data-i18n="q4.q">هل ما أقوله للأستاذة يبقى سرًّا؟</summary>
+        <p data-i18n="q4.a">نعم. المحامي ملزم قانونًا بالسرّ المهني، وكل ما تقوله أو تسلّمه من وثائق يبقى بينك وبين المكتب.</p>
+      </details>
+    </div>
   </div>
 </section>
 
 <section class="section contact" id="contact">
   <div class="wrap contact-in">
-    <div>
+    <div class="reveal">
       <h2 data-i18n="c.title">العنوان وأوقات العمل</h2>
+      <p class="status" id="status-contact" hidden><span class="pulse"></span><span class="status-txt"></span></p>
       <address>
-        <p data-i18n="c.addr">المركز العمراني الشمالي، إقامة برج المكاتب <span lang="fr" dir="ltr">International City Center</span>، الطابق الخامس، مكتب <span dir="ltr">B06</span>، تونس</p>
-        <p><a href="tel:+21692859325"><bdi dir="ltr">+216 92 859 325</bdi></a></p>
-        <p><a href="mailto:maitre@avocat-arfaouifatma.com"><bdi dir="ltr">maitre@avocat-arfaouifatma.com</bdi></a></p>
+        <p class="line"><svg class="ic"><use href="#i-pin"/></svg><span data-i18n="c.addr">المركز العمراني الشمالي، إقامة برج المكاتب <span lang="fr" dir="ltr">International City Center</span>، الطابق الخامس، مكتب <span dir="ltr">B06</span>، تونس</span></p>
+        <p class="line"><svg class="ic"><use href="#i-phone"/></svg><a href="tel:+21692859325"><bdi dir="ltr">+216 92 859 325</bdi></a></p>
+        <p class="line"><svg class="ic"><use href="#i-mail"/></svg><a href="mailto:maitre@avocat-arfaouifatma.com"><bdi dir="ltr">maitre@avocat-arfaouifatma.com</bdi></a></p>
       </address>
       <table class="hours">
-        <tr><th scope="row" data-i18n="c.week">من الاثنين إلى الجمعة</th><td><bdi dir="ltr">08:00 – 18:00</bdi></td></tr>
-        <tr><th scope="row" data-i18n="c.sat">السبت</th><td><bdi dir="ltr">09:00 – 13:00</bdi></td></tr>
-        <tr><th scope="row" data-i18n="c.sun">الأحد</th><td data-i18n="c.closed">مغلق</td></tr>
+        <tr data-days="1,2,3,4,5"><th scope="row" data-i18n="c.week">من الاثنين إلى الجمعة</th><td><bdi dir="ltr">08:00 – 18:00</bdi></td></tr>
+        <tr data-days="6"><th scope="row" data-i18n="c.sat">السبت</th><td><bdi dir="ltr">09:00 – 13:00</bdi></td></tr>
+        <tr data-days="0"><th scope="row" data-i18n="c.sun">الأحد</th><td data-i18n="c.closed">مغلق</td></tr>
       </table>
       <p class="contact-actions">
-        <a class="btn" href="https://wa.me/21692859325" target="_blank" rel="noopener" data-i18n="c.wa">اكتب على واتساب</a>
-        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=International+City+Center+Centre+Urbain+Nord+Tunis" target="_blank" rel="noopener" data-i18n="c.map">افتح الخريطة</a>
+        <a class="btn" href="https://wa.me/21692859325" target="_blank" rel="noopener"><svg class="ic"><use href="#i-chat"/></svg><span data-i18n="c.wa">اكتب على واتساب</span></a>
+        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=International+City+Center+Centre+Urbain+Nord+Tunis" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg><span data-i18n="c.map">افتح الخريطة</span></a>
       </p>
     </div>
-    <iframe class="map" title="Carte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=International+City+Center+Centre+Urbain+Nord+Tunis&output=embed"></iframe>
+    <div class="map-wrap reveal">
+      <iframe class="map" title="Carte" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=International+City+Center+Centre+Urbain+Nord+Tunis&output=embed"></iframe>
+    </div>
   </div>
 </section>
 
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap foot-in">
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
     <p data-i18n="foot">مكتب الأستاذة فاطمة العرفاوي، محامية لدى التعقيب. المعلومات الواردة في هذا الموقع عامة ولا تُعتبر استشارة قانونية.</p>
   </div>
 </footer>
+
+<a class="fab" id="fab" href="https://wa.me/21692859325" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg class="ic"><use href="#i-chat"/></svg>
+</a>
 
 <script src="app.js"></script>
 </body>

@@ -15,10 +15,12 @@ const FR = {
   'nav.steps': 'Déroulement',
   'nav.faq': 'Questions',
   'nav.contact': 'Adresse',
+  'nav.cta': 'Prendre rendez-vous',
   'hero.title': 'Maître Fatma Arfaoui',
   'hero.role': 'Avocate près la Cour de cassation, Tunis',
   'hero.lead': 'Maître Arfaoui est souvent en audience et ne peut pas toujours répondre au téléphone. Choisissez le jour et l’heure qui vous conviennent : le cabinet vous confirme le rendez-vous par WhatsApp.',
   'hero.call': 'Appeler le cabinet',
+  'hero.more': 'Voir les domaines',
   'book.title': 'Demander un rendez-vous',
   'book.day': 'Jour',
   'book.time': 'Heure',
@@ -29,6 +31,7 @@ const FR = {
   'book.mode.remote': 'À distance',
   'book.send': 'Envoyer la demande par WhatsApp',
   'book.note': 'WhatsApp s’ouvre avec un message déjà rédigé. Le rendez-vous n’est confirmé qu’après la réponse du cabinet.',
+  'dom.eyebrow': 'Le cabinet',
   'dom.title': 'Domaines d’intervention',
   'dom.intro': 'Le cabinet conseille et défend les particuliers comme les entreprises, devant toutes les juridictions.',
   'd1.t': 'Droit commercial', 'd1.p': 'Contrats commerciaux, fonds de commerce, recouvrement de créances et litiges entre commerçants.',
@@ -43,10 +46,13 @@ const FR = {
   'd10.t': 'Droit foncier', 'd10.p': 'Ventes immobilières, immatriculation, litiges de propriété et de bail.',
   'd11.t': 'Droit administratif', 'd11.p': 'Recours contre les décisions de l’administration, contentieux devant le Tribunal administratif.',
   'd12.t': 'Droit du travail', 'd12.p': 'Contrats de travail, licenciement abusif et litiges devant les prud’hommes.',
+  'steps.eyebrow': 'Simple et rapide',
+  'steps.cta': 'Demander un rendez-vous',
   'steps.title': 'Comment se passe un rendez-vous',
   's1.t': 'Vous choisissez le jour et l’heure', 's1.p': 'Avec le formulaire en haut de la page, puis vous envoyez la demande par WhatsApp.',
   's2.t': 'Le cabinet vous confirme', 's2.p': 'Vous recevez une réponse sur WhatsApp qui confirme le créneau, ou en propose un autre si Maître Arfaoui est en audience.',
   's3.t': 'Vous rencontrez Maître Arfaoui', 's3.p': 'Au cabinet, au Centre Urbain Nord, ou à distance par téléphone ou en visio.',
+  'faq.eyebrow': 'Une question ?',
   'faq.title': 'Questions fréquentes',
   'q1.q': 'J’ai appelé et personne n’a répondu, que faire ?',
   'q1.a': 'Maître Arfaoui passe une grande partie de ses journées au tribunal. Envoyez votre demande depuis cette page ou écrivez directement sur WhatsApp : le cabinet vous rappelle.',
@@ -77,6 +83,11 @@ const UI = {
     noSlots: 'لا توجد ساعات متاحة في هذا اليوم.',
     errName: 'اكتب اسمك ولقبك حتى يعرف المكتب من يطلب الموعد.',
     errSlot: 'اختر يومًا وساعة قبل إرسال الطلب.',
+    menu: 'القائمة',
+    openNow: (close) => `المكتب مفتوح الآن · يغلق على الساعة ${close}`,
+    closedNow: (when, time) => `المكتب مغلق الآن · يفتح ${when} على الساعة ${time}`,
+    today: 'اليوم', tomorrow: 'غدًا',
+    summary: (day, time) => `موعدك: ${day} على الساعة ${time}`,
     msg: (d) => `السلام عليكم أستاذة، أرغب في حجز موعد.\nالاسم: ${d.name}\nاليوم: ${d.day}\nالساعة: ${d.time}\nالموضوع: ${d.subject}\nطريقة الموعد: ${d.mode}`,
   },
   fr: {
@@ -88,6 +99,11 @@ const UI = {
     noSlots: 'Aucun créneau disponible ce jour-là.',
     errName: 'Indiquez votre nom et prénom pour que le cabinet sache qui demande le rendez-vous.',
     errSlot: 'Choisissez un jour et une heure avant d’envoyer la demande.',
+    menu: 'Menu',
+    openNow: (close) => `Ouvert maintenant · ferme à ${close}`,
+    closedNow: (when, time) => `Fermé pour le moment · ouvre ${when} à ${time}`,
+    today: 'aujourd’hui', tomorrow: 'demain',
+    summary: (day, time) => `Votre créneau : ${day} à ${time}`,
     msg: (d) => `Bonjour Maître, je souhaite prendre rendez-vous.\nNom : ${d.name}\nJour : ${d.day}\nHeure : ${d.time}\nObjet : ${d.subject}\nType : ${d.mode}`,
   },
 };
@@ -167,14 +183,56 @@ function setLang(next) {
   btn.lang = UI[lang].switchLang;
   btn.dir = UI[lang].switchLang === 'ar' ? 'rtl' : 'ltr';
   $('#error').hidden = true;
-  renderDays(); renderTimes(); renderSubjects();
+  $('#menu-btn').setAttribute('aria-label', UI[lang].menu);
+  renderDays(); renderTimes(); renderSubjects(); renderSummary(); renderStatus();
   try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
 $('#lang-btn').addEventListener('click', () => setLang(lang === 'ar' ? 'fr' : 'ar'));
 
-$('#days').addEventListener('change', (e) => { selectedDay = e.target.value; renderTimes(); });
-$('#times').addEventListener('change', (e) => { selectedTime = e.target.value; $('#error').hidden = true; });
+$('#days').addEventListener('change', (e) => { selectedDay = e.target.value; renderTimes(); renderSummary(); });
+$('#times').addEventListener('change', (e) => { selectedTime = e.target.value; $('#error').hidden = true; renderSummary(); });
+
+// Rappel du créneau choisi, sous le formulaire
+function renderSummary() {
+  const box = $('#summary');
+  const day = DAYS.find((d) => d.iso === selectedDay);
+  if (!day || !selectedTime) { box.hidden = true; return; }
+  box.querySelector('span').textContent = UI[lang].summary(fmt(day.date, {weekday: 'long', day: 'numeric', month: 'long'}), selectedTime);
+  box.hidden = false;
+}
+
+// --- Ouvert / fermé en ce moment (heure de Tunis) ---
+function renderStatus() {
+  const now = tunisNow();
+  const today = now.getUTCDay();
+  const mins = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const range = CONFIG.hours[today];
+  let text = '', open = false;
+  if (range && mins >= range[0] * 60 && mins < range[1] * 60) {
+    open = true;
+    text = UI[lang].openNow(`${pad(range[1])}:00`);
+  } else {
+    for (let i = 0; i < 8; i++) {
+      const r = CONFIG.hours[(today + i) % 7];
+      if (!r || (i === 0 && mins >= r[0] * 60)) continue;
+      const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + i));
+      const when = i === 0 ? UI[lang].today : i === 1 ? UI[lang].tomorrow : fmt(d, {weekday: 'long'});
+      text = UI[lang].closedNow(when, `${pad(r[0])}:00`);
+      break;
+    }
+  }
+  document.querySelectorAll('.status').forEach((el) => {
+    el.classList.toggle('open', open);
+    el.querySelector('.status-txt').textContent = text;
+    el.hidden = !text;
+  });
+  document.querySelectorAll('.hours tr').forEach((tr) => {
+    tr.classList.toggle('today', tr.dataset.days.split(',').includes(String(today)));
+  });
+}
+setInterval(renderStatus, 60e3);
+
 
 $('#rdv').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -194,6 +252,58 @@ $('#rdv').addEventListener('submit', (e) => {
   });
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
 });
+
+// --- Menu mobile ---
+const menuBtn = $('#menu-btn');
+const nav = $('#nav');
+const closeMenu = () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+menuBtn.addEventListener('click', () => {
+  const open = !nav.classList.contains('open');
+  nav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+nav.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+// --- Effets au défilement : barre de progression, en-tête, bouton WhatsApp ---
+const header = $('#top');
+const bar = $('#progress');
+const fab = $('#fab');
+const hero = $('.hero');
+let ticking = false;
+function onScroll() {
+  const y = window.scrollY;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+  header.classList.toggle('scrolled', y > 10);
+  fab.classList.toggle('show', y > hero.offsetHeight * 0.85);
+  ticking = false;
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, {passive: true});
+addEventListener('resize', onScroll);
+onScroll();
+
+// --- Apparition des blocs au défilement, et lien actif dans le menu ---
+if ('IntersectionObserver' in window) {
+  document.querySelectorAll('.domains, .steps, .faq').forEach((group) => {
+    [...group.children].forEach((el, i) => el.style.setProperty('--i', i % 6));
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {rootMargin: '0px 0px -8% 0px', threshold: 0.08});
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  const links = [...document.querySelectorAll('.nav a:not(.nav-cta)')];
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
+    });
+  }, {rootMargin: '-45% 0px -50% 0px'});
+  document.querySelectorAll('main section[id]').forEach((s) => spy.observe(s));
+} else {
+  document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+}
 
 // Langue de départ : ?lang=fr dans le lien, sinon le dernier choix, sinon l'arabe.
 let start = new URLSearchParams(location.search).get('lang');
