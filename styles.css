@@ -216,7 +216,10 @@ html[dir="rtl"] .pill-link.ghost:hover .ic { transform: scaleX(-1) translateX(3p
 .times .chip { animation: chipIn .35s var(--ease) both; }
 @keyframes chipIn { from { opacity: 0; transform: translateY(6px); } }
 
-.row { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+.row { display: grid; gap: 1.25rem; margin-bottom: 1.25rem; }
+.book .row fieldset { margin: 0; }
+.field-full { display: block; margin-bottom: 1.25rem; }
+.chip.urgent input:checked + span { background: var(--danger); border-color: var(--danger); box-shadow: 0 6px 16px -8px rgba(163, 38, 31, .8); }
 .field input, .field select {
   width: 100%; font: inherit; color: inherit;
   padding: 0.65rem 0.85rem; border: 1px solid var(--line); border-radius: 10px; background: var(--paper);
@@ -266,30 +269,6 @@ html[lang="ar"] .eyebrow { letter-spacing: 0; font-size: .95rem; }
 .eyebrow::before { content: ""; width: 1.75rem; height: 2px; border-radius: 2px; background: currentColor; }
 .intro { margin-top: 0.75rem; max-width: 40rem; color: var(--muted); }
 
-.domains { margin-top: 2.5rem; display: grid; gap: 1rem; }
-.domains article {
-  position: relative; overflow: hidden;
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.35rem 1.35rem 1.4rem;
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
-}
-.domains article::after {
-  content: ""; position: absolute; inset: auto 0 0; height: 3px;
-  background: linear-gradient(90deg, var(--brass), var(--brass-soft));
-  transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease);
-}
-html[dir="rtl"] .domains article::after { transform-origin: right; }
-.domains article:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
-.domains article:hover::after { transform: scaleX(1); }
-.d-ic {
-  display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 12px;
-  background: var(--wash); color: var(--tunis); margin-bottom: .9rem;
-  transition: background .35s, color .35s, transform .35s var(--ease);
-}
-.d-ic svg { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.domains article:hover .d-ic { background: var(--tunis-deep); color: var(--brass-soft); transform: rotate(-6deg) scale(1.05); }
-.domains h3 { font-size: 1.25rem; color: var(--tunis-deep); }
-.domains p { margin-top: 0.35rem; color: var(--text); font-size: 0.975rem; }
 
 .steps { position: relative; list-style: none; counter-reset: step; margin: 2.5rem 0 0; padding: 0; display: grid; gap: 1.25rem; }
 .steps li {
@@ -396,7 +375,6 @@ html[dir="rtl"] .hours tr.today th { box-shadow: inset -3px 0 0 var(--brass); }
   .row { grid-template-columns: 1fr 1fr; }
   .days { grid-template-columns: repeat(6, 1fr); }
   .times { grid-template-columns: repeat(5, 1fr); }
-  .domains { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: repeat(3, 1fr); }
   .steps::before {
     content: ""; position: absolute; z-index: 0; top: 1.45rem; inset-inline-start: 1.95rem; inset-inline-end: calc((100% - 2.5rem) / 3 - 1.95rem);
@@ -411,7 +389,6 @@ html[dir="rtl"] .hours tr.today th { box-shadow: inset -3px 0 0 var(--brass); }
   .hero { padding-block: 4.5rem 6rem; }
   .hero-in { grid-template-columns: 1fr minmax(0, 32rem); align-items: center; gap: 4rem; }
   .book { padding: 2rem; }
-  .domains { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .contact-in { grid-template-columns: 1fr 1fr; align-items: stretch; }
 }
 

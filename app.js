@@ -11,7 +11,6 @@ const CONFIG = {
 const FR = {
   'skip': 'Aller à la prise de rendez-vous',
   'brand': 'Maître Fatma Arfaoui',
-  'nav.domains': 'Domaines',
   'nav.steps': 'Déroulement',
   'nav.faq': 'Questions',
   'nav.contact': 'Adresse',
@@ -20,32 +19,22 @@ const FR = {
   'hero.role': 'Avocate près la Cour de cassation, Tunis',
   'hero.lead': 'Maître Arfaoui est souvent en audience et ne peut pas toujours répondre au téléphone. Choisissez le jour et l’heure qui vous conviennent : le cabinet vous confirme le rendez-vous par WhatsApp.',
   'hero.call': 'Appeler le cabinet',
-  'hero.more': 'Voir les domaines',
+  'hero.more': 'Comment ça se passe ?',
   'book.title': 'Demander un rendez-vous',
   'book.day': 'Jour',
   'book.time': 'Heure',
   'book.name': 'Nom et prénom',
-  'book.subject': 'Objet de la consultation',
+  'book.client': 'Vous êtes',
+  'book.client.new': 'Nouveau client',
+  'book.client.old': 'Déjà client',
+  'book.urgent': 'Est-ce urgent ?',
+  'book.urgent.yes': 'Urgent',
+  'book.urgent.no': 'Pas urgent',
   'book.mode': 'Type de rendez-vous',
   'book.mode.office': 'Au cabinet',
   'book.mode.remote': 'À distance',
   'book.send': 'Envoyer la demande par WhatsApp',
   'book.note': 'WhatsApp s’ouvre avec un message déjà rédigé. Le rendez-vous n’est confirmé qu’après la réponse du cabinet.',
-  'dom.eyebrow': 'Le cabinet',
-  'dom.title': 'Domaines d’intervention',
-  'dom.intro': 'Le cabinet conseille et défend les particuliers comme les entreprises, devant toutes les juridictions.',
-  'd1.t': 'Droit commercial', 'd1.p': 'Contrats commerciaux, fonds de commerce, recouvrement de créances et litiges entre commerçants.',
-  'd2.t': 'Droit civil et de la famille', 'd2.p': 'Divorce, garde et pension, successions et partages, responsabilité et indemnisation.',
-  'd3.t': 'Droit des sociétés', 'd3.p': 'Création de sociétés, rédaction des statuts, conflits entre associés, liquidation.',
-  'd4.t': 'Droit fiscal', 'd4.p': 'Vérification fiscale, opposition aux arrêtés de taxation et litiges avec l’administration.',
-  'd5.t': 'Droit des investissements', 'd5.p': 'Accompagnement des investisseurs tunisiens et étrangers dans leurs démarches d’implantation.',
-  'd6.t': 'Arbitrage et contentieux', 'd6.p': 'Représentation devant les tribunaux et les instances arbitrales, négociation avant procès.',
-  'd7.t': 'Propriété intellectuelle', 'd7.p': 'Dépôt et protection des marques, droits d’auteur, actions en contrefaçon.',
-  'd8.t': 'Droit international', 'd8.p': 'Contrats et opérations transfrontalières, arbitrage international.',
-  'd9.t': 'Droit pénal', 'd9.p': 'Défense des prévenus et constitution de partie civile, à chaque étape de la procédure.',
-  'd10.t': 'Droit foncier', 'd10.p': 'Ventes immobilières, immatriculation, litiges de propriété et de bail.',
-  'd11.t': 'Droit administratif', 'd11.p': 'Recours contre les décisions de l’administration, contentieux devant le Tribunal administratif.',
-  'd12.t': 'Droit du travail', 'd12.p': 'Contrats de travail, licenciement abusif et litiges devant les prud’hommes.',
   'steps.eyebrow': 'Simple et rapide',
   'steps.cta': 'Demander un rendez-vous',
   'steps.title': 'Comment se passe un rendez-vous',
@@ -77,7 +66,7 @@ const UI = {
   ar: {
     title: 'الأستاذة فاطمة العرفاوي، محامية لدى التعقيب بتونس',
     desc: 'مكتب الأستاذة فاطمة العرفاوي، محامية لدى التعقيب بتونس. اطلب موعدك مباشرة عبر الإنترنت.',
-    other: 'موضوع آخر',
+    errClient: 'اختر إن كنت حريفًا جديدًا أو حريفًا سابقًا.',
     switchTo: 'Français', switchLang: 'fr',
     locale: 'ar-TN',
     noSlots: 'لا توجد ساعات متاحة في هذا اليوم.',
@@ -88,12 +77,12 @@ const UI = {
     closedNow: (when, time) => `المكتب مغلق الآن · يفتح ${when} على الساعة ${time}`,
     today: 'اليوم', tomorrow: 'غدًا',
     summary: (day, time) => `موعدك: ${day} على الساعة ${time}`,
-    msg: (d) => `السلام عليكم أستاذة، أرغب في حجز موعد.\nالاسم: ${d.name}\nاليوم: ${d.day}\nالساعة: ${d.time}\nالموضوع: ${d.subject}\nطريقة الموعد: ${d.mode}`,
+    msg: (d) => `${d.urgent ? '⚠️ طلب عاجل\n\n' : ''}السلام عليكم أستاذة، أرغب في حجز موعد.\nالاسم: ${d.name}\nالحريف: ${d.client}\nعاجل: ${d.urgency}\nاليوم: ${d.day}\nالساعة: ${d.time}\nطريقة الموعد: ${d.mode}`,
   },
   fr: {
     title: 'Maître Fatma Arfaoui, avocate près la Cour de cassation à Tunis',
     desc: 'Cabinet de Maître Fatma Arfaoui, avocate près la Cour de cassation à Tunis. Demandez votre rendez-vous en ligne.',
-    other: 'Autre sujet',
+    errClient: 'Indiquez si vous êtes un nouveau client ou déjà client.',
     switchTo: 'العربية', switchLang: 'ar',
     locale: 'fr-FR',
     noSlots: 'Aucun créneau disponible ce jour-là.',
@@ -104,7 +93,7 @@ const UI = {
     closedNow: (when, time) => `Fermé pour le moment · ouvre ${when} à ${time}`,
     today: 'aujourd’hui', tomorrow: 'demain',
     summary: (day, time) => `Votre créneau : ${day} à ${time}`,
-    msg: (d) => `Bonjour Maître, je souhaite prendre rendez-vous.\nNom : ${d.name}\nJour : ${d.day}\nHeure : ${d.time}\nObjet : ${d.subject}\nType : ${d.mode}`,
+    msg: (d) => `${d.urgent ? '⚠️ DEMANDE URGENTE\n\n' : ''}Bonjour Maître, je souhaite prendre rendez-vous.\nNom : ${d.name}\nClient : ${d.client}\nUrgence : ${d.urgency}\nJour : ${d.day}\nHeure : ${d.time}\nType : ${d.mode}`,
   },
 };
 
@@ -162,14 +151,6 @@ function renderTimes() {
     <span dir="ltr">${t}</span></label>`).join('');
 }
 
-function renderSubjects() {
-  const sel = $('#subject');
-  const keep = sel.selectedIndex;
-  const titles = [...document.querySelectorAll('.domains h3')].map((h) => h.textContent);
-  sel.innerHTML = [...titles, UI[lang].other].map((t) => `<option>${t}</option>`).join('');
-  if (keep > 0) sel.selectedIndex = keep;
-}
-
 function setLang(next) {
   lang = next;
   const dict = lang === 'fr' ? FR : AR;
@@ -184,7 +165,7 @@ function setLang(next) {
   btn.dir = UI[lang].switchLang === 'ar' ? 'rtl' : 'ltr';
   $('#error').hidden = true;
   $('#menu-btn').setAttribute('aria-label', UI[lang].menu);
-  renderDays(); renderTimes(); renderSubjects(); renderSummary(); renderStatus();
+  renderDays(); renderTimes(); renderSummary(); renderStatus();
   try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
@@ -192,6 +173,7 @@ $('#lang-btn').addEventListener('click', () => setLang(lang === 'ar' ? 'fr' : 'a
 
 $('#days').addEventListener('change', (e) => { selectedDay = e.target.value; renderTimes(); renderSummary(); });
 $('#times').addEventListener('change', (e) => { selectedTime = e.target.value; $('#error').hidden = true; renderSummary(); });
+$('#client').addEventListener('change', () => { $('#error').hidden = true; });
 
 // Rappel du créneau choisi, sous le formulaire
 function renderSummary() {
@@ -241,13 +223,19 @@ $('#rdv').addEventListener('submit', (e) => {
   const day = DAYS.find((d) => d.iso === selectedDay);
   if (!day || !selectedTime) { err.textContent = UI[lang].errSlot; err.hidden = false; return; }
   if (!name) { err.textContent = UI[lang].errName; err.hidden = false; $('#name').focus(); return; }
+  const client = document.querySelector('input[name="client"]:checked');
+  if (!client) { err.textContent = UI[lang].errClient; err.hidden = false; $('#client input').focus(); return; }
   err.hidden = true;
-  const mode = document.querySelector('input[name="mode"]:checked').nextElementSibling.textContent;
+  const label = (input) => input.nextElementSibling.textContent;
+  const urgent = document.querySelector('input[name="urgent"]:checked');
+  const mode = label(document.querySelector('input[name="mode"]:checked'));
   const text = UI[lang].msg({
     name,
     day: fmt(day.date, {weekday: 'long', day: 'numeric', month: 'long'}),
     time: selectedTime,
-    subject: $('#subject').value,
+    client: label(client),
+    urgency: label(urgent),
+    urgent: urgent.value === 'yes',
     mode,
   });
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
@@ -285,7 +273,7 @@ onScroll();
 
 // --- Apparition des blocs au défilement, et lien actif dans le menu ---
 if ('IntersectionObserver' in window) {
-  document.querySelectorAll('.domains, .steps, .faq').forEach((group) => {
+  document.querySelectorAll('.steps, .faq').forEach((group) => {
     [...group.children].forEach((el, i) => el.style.setProperty('--i', i % 6));
   });
   const io = new IntersectionObserver((entries) => {
